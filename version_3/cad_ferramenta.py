@@ -24,7 +24,7 @@ from PIL import Image, ImageTk
 # conexao.commit()
 # conexao.close()
 
-def cadastrar_ferramentas:
+def cadastrar_ferramentas():
 
     conexao = sqlite3.connect('cad_ferramentas.db')
     c = conexao.cursor()
