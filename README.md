@@ -11,6 +11,6 @@ Equipe (Grupo 12):
 * Jonathan Araujo 
 * Jamison Queiroz 
 * Rafael Minski
-* Julio César
+* Julio César Matos da Silva
 
 Link YouTube mostrando funcionalidades:  
