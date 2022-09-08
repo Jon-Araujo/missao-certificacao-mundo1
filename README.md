@@ -11,7 +11,5 @@ Equipe:
 * Jonathan da Silva Araujo 
 * Jamison Queiroz 
 *  Rafael 
-*  Julio
 
-       
 Link YouTube mostrando funcionalidades:  
