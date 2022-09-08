@@ -20,7 +20,7 @@ class TecnicoBD:
         self.objBD = crud_tecnico.AppBD()
 
         # Inserindo Logo:
-        self.image = Image.open('tecnico.png').resize((70,70))
+        self.image = Image.open('tecnico.png').resize((70, 70))
         self.photo = ImageTk.PhotoImage(self.image)
         self.labelImage = Label(win, image=self.photo)
         self.labelImage.image = self.photo
@@ -79,7 +79,7 @@ class TecnicoBD:
         # Componentes TreeView
         self.dadosColunas = ("Codigo","Nome", "CPF", 'Celular', 'Turno', 'Equipe', 'Tipo', 'Login', 'Senha', 'Email')
         self.treeTecnicos = ttk.Treeview(win, columns=self.dadosColunas, show='headings')
-        self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeTecnicos.yview())
+        self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeTecnicos.yview)
         self.treeTecnicos.configure(yscroll=self.scrollbar.set)
         self.scrollbar.grid(row=7, column=9, sticky='ns', padx=5, pady=5)
 
@@ -187,12 +187,13 @@ class TecnicoBD:
             self.string = senha.encode()
             self.hash = hashlib.md5(self.string)
             self.hash = self.hash.hexdigest()
-            self.objBD.inserirDados(nome, cpf, celular, turno, equipe, tipo_user, login, self.hash,email)
+            self.objBD.inserirDados(nome, cpf, celular, turno, equipe, tipo_user, login, self.hash, email)
             self.treeTecnicos.delete(*self.treeTecnicos.get_children())
             self.carregarDadosIniciais()
             self.fLimparTela()
         except:
             print("Não foi possível fazer o cadastro")
+
 #----------------------------------------------------------------------------------------------------------------------
 # Método Limpar Tela
 #----------------------------------------------------------------------------------------------------------------------
@@ -246,7 +247,7 @@ class TecnicoBD:
     def fGerarExcel(self):
         try:
             self.Lista = self.objBD.selecionarDados()
-            self.ListaTecnicos = pd.DataFrame(self.Lista, columns=["Codigo","Nome", "CPF", 'Celular', 'Turno',
+            self.ListaTecnicos = pd.DataFrame(self.Lista, columns=["Codigo", "Nome", "CPF", 'Celular', 'Turno',
                                                                    'Equipe', 'Tipo', 'Login', 'Senha', 'Email'])
             self.ListaTecnicos.to_excel('lista_tecnicos.xlsx')
             messagebox.showinfo(title="Alerta", message="Arquivo Criado com Sucesso!")

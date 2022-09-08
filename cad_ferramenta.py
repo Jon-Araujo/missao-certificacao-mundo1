@@ -64,7 +64,7 @@ class FerramentaBD:
         # Componentes TreeView
         self.dadosColunas = ("Codigo", "Descricao", "Fabricante", 'Voltagem', 'Serial', 'Tamanho', 'Tipo', 'Tempo')
         self.treeFerramenta = ttk.Treeview(win, columns=self.dadosColunas, show='headings')
-        self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeFerramenta.yview())
+        self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeFerramenta.yview)
         self.treeFerramenta.configure(yscroll=self.scrollbar.set)
         self.scrollbar.grid(row=6, column=8, sticky='ns', padx=5, pady=5)
 

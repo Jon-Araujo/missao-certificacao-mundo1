@@ -71,7 +71,7 @@ class ReservaBD:
         # Componentes TreeView
         self.dadosColunas = ("Codigo", "Ferramenta", "Descricao", 'Data', 'Retirada', 'Devolucao', 'Tecnico')
         self.treeReserva = ttk.Treeview(win, columns=self.dadosColunas, show='headings')
-        self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeReserva.yview())
+        self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeReserva.yview)
         self.treeReserva.configure(yscroll=self.scrollbar.set)
         self.scrollbar.grid(row=6, column=8, sticky='ns', padx=5, pady=5)
 
@@ -92,7 +92,7 @@ class ReservaBD:
         self.treeReserva.column("Tecnico", minwidth=0, width=120)
 
         self.treeReserva.bind("<<TreeviewSelect>>", self.apresentarRegistrosSelecionados)
-        self.treeReserva.grid(row=6, column=0, columnspan=8, padx=5, pady=5)
+        self.treeReserva.grid(row=6,column=0, columnspan=8, padx=5, pady=5)
 
         self.carregarDadosIniciais()
 
@@ -111,6 +111,7 @@ class ReservaBD:
             self.txtHoraR.insert(0, horar)
             self.txtHoraD.insert(0, horad)
             self.comboTecnico.set(tecnico_id)
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Método Carregar Dados Iniciais
@@ -163,7 +164,8 @@ class ReservaBD:
             self.treeReserva.delete(*self.treeReserva.get_children())
             self.carregarDadosIniciais()
             self.fLimparTela()
-            email_reserva(tecnico_id, ferramenta_id, data, horar, descricao, horad)
+           # print(self.objBD.selecionaEmail(tecnico_id))
+            email_reserva(tecnico_id, ferramenta_id, data, horar, descricao, horad, self.objBD.selecionaEmail(tecnico_id))
         except:
             print("Não foi possível fazer o cadastro")
 
@@ -216,7 +218,7 @@ class ReservaBD:
         try:
             self.Lista = self.objBD.selecionarDados()
             self.ListaReserva = pd.DataFrame(self.Lista, columns=["Codigo","Ferramenta", "Descricao", 'Data', 'Retirada',
-                                                                   'Devolucao', 'tecnico'])
+                                                                   'Devolucao', 'Tecnico'])
             self.ListaReserva.to_excel('lista_reserva.xlsx')
             messagebox.showinfo(title="Alerta", message="Arquivo Criado com Sucesso!")
         except:
