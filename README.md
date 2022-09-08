@@ -10,6 +10,7 @@ Semestre: 2022.2
 Equipe (Grupo 12): 
 * Jonathan Araujo 
 * Jamison Queiroz 
-*  Rafael Minski
+* Rafael Minski
+* Julio César
 
 Link YouTube mostrando funcionalidades:  
