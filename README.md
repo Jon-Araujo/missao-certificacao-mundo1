@@ -7,7 +7,7 @@ Curso: Desenvolvimento Full Stack
 Disciplina: Projetando uma aplicação desktop
 Turma: 9001  
 Semestre: 2022.2  
-Alunos: 
+Equipe: 
 * Jonathan da Silva Araujo 
 * Jamison Queiroz 
 *  Rafael 
