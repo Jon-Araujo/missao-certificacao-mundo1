@@ -13,6 +13,7 @@ from PIL import Image, ImageTk
 import pandas as pd
 from tkinter import messagebox
 import crud_reserva
+from send_mail import email_reserva
 
 class ReservaBD:
     def __init__(self, win):
@@ -162,8 +163,11 @@ class ReservaBD:
             self.treeReserva.delete(*self.treeReserva.get_children())
             self.carregarDadosIniciais()
             self.fLimparTela()
+            email_reserva(tecnico_id, ferramenta_id, data, horar, descricao, horad)
         except:
             print("Não foi possível fazer o cadastro")
+
+
 #----------------------------------------------------------------------------------------------------------------------
 # Método Limpar Tela
 #----------------------------------------------------------------------------------------------------------------------
@@ -193,7 +197,7 @@ class ReservaBD:
             print("Não foi possível fazer a exclusão")
 
 #-----------------------------------------------------------------------------------------------------------------------
-# Método Atualizar Tecnico
+# Método Atualizar Reserva
 #-----------------------------------------------------------------------------------------------------------------------
     def fAtualizarReserva(self):
         try:
@@ -217,8 +221,6 @@ class ReservaBD:
             messagebox.showinfo(title="Alerta", message="Arquivo Criado com Sucesso!")
         except:
             print("Não foi possível criar o arquivo xlsx")
-
-
 
 if __name__ == "__main__":
     janela = Tk()

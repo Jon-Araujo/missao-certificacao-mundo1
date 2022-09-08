@@ -41,14 +41,14 @@ class AppBD:
 #----------------------------------------------------------------------------------------------------------------------
 # Inserir tecnico
 #----------------------------------------------------------------------------------------------------------------------
-    def inserirDados(self, nome, cpf, celular, turno, equipe, tipo_user, login, senha):
+    def inserirDados(self, nome, cpf, celular, turno, equipe, tipo_user, login, senha, email):
         try:
             self.abrirConexao()
             cursor = self.connection.cursor()
-            sql_insert_query = "INSERT INTO tecnico(nome,cpf,celular,turno,equipe,tipo_user,login,senha) " \
-                               "VALUES (:nome,:cpf,:celular,:turno,:equipe,:tipo_user,:login,:senha)"
+            sql_insert_query = "INSERT INTO tecnico(nome,cpf,celular,turno,equipe,tipo_user,login,senha,email) " \
+                               "VALUES (:nome,:cpf,:celular,:turno,:equipe,:tipo_user,:login,:senha,:email)"
             record_to_insert = {'nome':nome, 'cpf':cpf, 'celular':celular, 'turno':turno,
-                                'equipe':equipe, 'tipo_user':tipo_user, 'login':login, 'senha':senha}
+                                'equipe':equipe, 'tipo_user':tipo_user, 'login':login, 'senha':senha, 'email':email}
             cursor.execute(sql_insert_query, record_to_insert)
             self.connection.commit()
         except (Exception, sqlite3.Error) as error:
@@ -61,14 +61,14 @@ class AppBD:
 #----------------------------------------------------------------------------------------------------------------------
 # Atualizar tecnico
 #----------------------------------------------------------------------------------------------------------------------
-    def atualizarDados(self, codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha):
+    def atualizarDados(self, codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha, email):
         try:
             self.abrirConexao()
             cursor = self.connection.cursor()
             sql_update_query = "UPDATE tecnico SET nome=:nome,cpf=:cpf,celular=:celular,turno=:turno,equipe=:equipe" \
-                               ",tipo_user=:tipo_user,login=:login,senha=:senha WHERE id=:id"
+                               ",tipo_user=:tipo_user,login=:login,senha=:senha, email=:email WHERE id=:id"
             cursor.execute(sql_update_query, {'nome':nome, 'cpf':cpf, 'celular':celular, 'turno':turno,
-                                'equipe':equipe, 'tipo_user':tipo_user, 'login':login, 'senha':senha, 'id':codigo})
+                                'equipe':equipe, 'tipo_user':tipo_user, 'login':login, 'senha':senha,'email':email, 'id':codigo})
             self.connection.commit()
         except (Exception, sqlite3.Error) as error:
             print("Falha ao Atualizar", error)

@@ -65,6 +65,10 @@ class TecnicoBD:
         self.txtSenha = Entry(win, show="*")
         self.txtSenha.grid(row=5, column=1, padx=5, pady=5)
 
+        self.lblEmail = Label(win, text='Email').grid(row=5, column=2, padx=5, pady=5)
+        self.txtEmail = Entry(win)
+        self.txtEmail.grid(row=5, column=3, padx=5, pady=5)
+
         # Botões
         self.btnCadastrar = Button(win, text='Cadastrar', command=self.fCadastrarTecnico).grid(row=6, column=2, padx=5, pady=20)
         self.btnAtualizar = Button(win, text='Atualizar', command=self.fAtualizarTecnico).grid(row=6, column=3, padx=5, pady=20)
@@ -73,7 +77,7 @@ class TecnicoBD:
         self.btnLimpar = Button(win, text='Limpar', command=self.fLimparTela).grid(row=6, column=6, padx=5, pady=20)
 
         # Componentes TreeView
-        self.dadosColunas = ("Codigo","Nome", "CPF", 'Celular', 'Turno', 'Equipe', 'Tipo', 'Login', 'Senha')
+        self.dadosColunas = ("Codigo","Nome", "CPF", 'Celular', 'Turno', 'Equipe', 'Tipo', 'Login', 'Senha', 'Email')
         self.treeTecnicos = ttk.Treeview(win, columns=self.dadosColunas, show='headings')
         self.scrollbar = ttk.Scrollbar(win, orient=VERTICAL, command=self.treeTecnicos.yview())
         self.treeTecnicos.configure(yscroll=self.scrollbar.set)
@@ -88,21 +92,24 @@ class TecnicoBD:
         self.treeTecnicos.heading("Tipo", text="Tipo")
         self.treeTecnicos.heading("Login", text="Login")
         self.treeTecnicos.heading("Senha", text="Senha")
+        self.treeTecnicos.heading("Email", text="Email")
 
         self.treeTecnicos.column("Codigo", minwidth=0, width=50)
-        self.treeTecnicos.column("Nome", minwidth=0, width=120)
+        self.treeTecnicos.column("Nome", minwidth=0, width=100)
         self.treeTecnicos.column("CPF", minwidth=0, width=100)
         self.treeTecnicos.column("Celular", minwidth=0, width=100)
         self.treeTecnicos.column("Turno", minwidth=0, width=100)
-        self.treeTecnicos.column("Equipe", minwidth=0, width=100)
+        self.treeTecnicos.column("Equipe", minwidth=0, width=70)
         self.treeTecnicos.column("Tipo", minwidth=0, width=100)
-        self.treeTecnicos.column("Login", minwidth=0, width=100)
+        self.treeTecnicos.column("Login", minwidth=0, width=70)
         self.treeTecnicos.column("Senha", minwidth=0, width=100)
+        self.treeTecnicos.column("Email", minwidth=0, width=90)
 
         self.treeTecnicos.bind("<<TreeviewSelect>>", self.apresentarRegistrosSelecionados)
         self.treeTecnicos.grid(row=7, column=0, columnspan=9, padx=5, pady=5)
 
         self.carregarDadosIniciais()
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Método Apresentar Registro Selecionado
 # ----------------------------------------------------------------------------------------------------------------------
@@ -110,7 +117,7 @@ class TecnicoBD:
         self.fLimparTela()
         for selection in self.treeTecnicos.selection():
             item = self.treeTecnicos.item(selection)
-            codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha = item["values"][0:9]
+            codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha, email = item["values"][0:10]
             self.txtCodigo.insert(0, codigo)
             self.txtNome.insert(0, nome)
             self.txtCpf.insert(0, cpf)
@@ -120,6 +127,7 @@ class TecnicoBD:
             self.txtTipo.insert(0, tipo_user)
             self.txtLogin.insert(0, login)
             self.txtSenha.insert(0, senha)
+            self.txtEmail.insert(0, email)
 # ----------------------------------------------------------------------------------------------------------------------
 # Método Carregar Dados Iniciais
 # ----------------------------------------------------------------------------------------------------------------------
@@ -137,8 +145,10 @@ class TecnicoBD:
                 tipo_user = item[6]
                 login = item[7]
                 senha = item[8]
+                email = item[9]
+
                 self.treeTecnicos.insert('', 'end', iid=self.iid, values=(codigo, nome, cpf, celular, turno, equipe,
-                                                                          tipo_user, login, senha))
+                                                                          tipo_user, login, senha, email))
                 self.iid = self.iid + 1
         except:
             print("Ainda não existem dados para carregar")
@@ -156,9 +166,10 @@ class TecnicoBD:
             tipo_user = self.txtTipo.get()
             login = self.txtLogin.get()
             senha = self.txtSenha.get()
+            email = self.txtEmail.get()
         except:
             print("Não foi possível ler os dados.")
-        return codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha
+        return codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha, email
 #----------------------------------------------------------------------------------------------------------------------
 # Método Cadastrar Tecnico
 #----------------------------------------------------------------------------------------------------------------------
@@ -172,10 +183,11 @@ class TecnicoBD:
             tipo_user = self.txtTipo.get()
             login = self.txtLogin.get()
             senha = self.txtSenha.get()
+            email = self.txtEmail.get()
             self.string = senha.encode()
             self.hash = hashlib.md5(self.string)
             self.hash = self.hash.hexdigest()
-            self.objBD.inserirDados(nome, cpf, celular, turno, equipe, tipo_user, login, self.hash)
+            self.objBD.inserirDados(nome, cpf, celular, turno, equipe, tipo_user, login, self.hash,email)
             self.treeTecnicos.delete(*self.treeTecnicos.get_children())
             self.carregarDadosIniciais()
             self.fLimparTela()
@@ -195,6 +207,7 @@ class TecnicoBD:
             self.txtLogin.delete(0, END)
             self.txtSenha.delete(0, END)
             self.txtCodigo.delete(0, END)
+            self.txtEmail.delete(0, END)
         except:
             print("Não foi possível Limpar os campos")
 #-----------------------------------------------------------------------------------------------------------------------
@@ -202,7 +215,7 @@ class TecnicoBD:
 #-----------------------------------------------------------------------------------------------------------------------
     def fExcluirTecnico(self):
         try:
-            codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha = self.fLerCampos()
+            codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha, email = self.fLerCampos()
             self.objBD.excluirDados(codigo)
             # Recarrega dados na tela
             self.treeTecnicos.delete(*self.treeTecnicos.get_children())
@@ -216,11 +229,11 @@ class TecnicoBD:
 #-----------------------------------------------------------------------------------------------------------------------
     def fAtualizarTecnico(self):
         try:
-            codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha = self.fLerCampos()
+            codigo, nome, cpf, celular, turno, equipe, tipo_user, login, senha, email = self.fLerCampos()
             self.string = senha.encode()
             self.hash = hashlib.md5(self.string)
             self.hash = self.hash.hexdigest()
-            self.objBD.atualizarDados(codigo, nome, cpf, celular, turno, equipe, tipo_user, login, self.hash)
+            self.objBD.atualizarDados(codigo, nome, cpf, celular, turno, equipe, tipo_user, login, self.hash, email)
             # Recarrega dados na tela
             self.treeTecnicos.delete(*self.treeTecnicos.get_children())
             self.carregarDadosIniciais()
@@ -234,7 +247,7 @@ class TecnicoBD:
         try:
             self.Lista = self.objBD.selecionarDados()
             self.ListaTecnicos = pd.DataFrame(self.Lista, columns=["Codigo","Nome", "CPF", 'Celular', 'Turno',
-                                                                   'Equipe', 'Tipo', 'Login', 'Senha'])
+                                                                   'Equipe', 'Tipo', 'Login', 'Senha', 'Email'])
             self.ListaTecnicos.to_excel('lista_tecnicos.xlsx')
             messagebox.showinfo(title="Alerta", message="Arquivo Criado com Sucesso!")
         except:
