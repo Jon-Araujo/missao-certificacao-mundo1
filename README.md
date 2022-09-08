@@ -4,7 +4,7 @@
 
 Campus: Polo Nova Iguaçu - RJ  
 Curso: Desenvolvimento Full Stack  
-Disciplina: Projetando uma aplicação desktop
+Disciplina: Projetando uma aplicação desktop  
 Turma: 9001  
 Semestre: 2022.2  
 Equipe (Grupo 12): 
