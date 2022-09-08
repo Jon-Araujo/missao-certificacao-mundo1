@@ -7,7 +7,7 @@ Disciplina: Projetando uma aplicação desktop - missão certificação
 Turma: 9001  
 Semestre: 2022.2  
 Alunos: Jonathan da Silva Araujo
-        <br/>Jamison Queiroz
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>Jamison Queiroz
        <br/>Rafael
        <br/>Julio
        
