@@ -6,5 +6,9 @@ Curso: Desenvolvimento Full Stack
 Disciplina: Projetando uma aplicação desktop - missão certificação  
 Turma: 9001  
 Semestre: 2022.2  
-Alunos: Jonathan da Silva Araujo, Jamison, Rafael  
+Alunos: Jonathan da Silva Araujo
+        Jamison Queiroz
+        Rafael
+        Julio
+       
 Link YouTube mostrando funcionalidades:  
