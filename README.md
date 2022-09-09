@@ -11,7 +11,7 @@ Semestre: 2022.2
 Equipe (Grupo 12): 
 * Jonathan Araujo (202205178111) 
 * Jamison Queiroz 
-* Rafael Minski
+* Rafael Minski (202205006311)
 * Julio César Matos da Silva
 
 Execução: Para que o usuário possa executar o sistema precisa instalar os seguintes pacotes:  
