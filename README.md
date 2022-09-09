@@ -12,7 +12,7 @@ Equipe (Grupo 12):
 * Jonathan Araujo (202205178111) 
 * Jamison Queiroz 
 * Rafael Minski (202205006311)
-* Julio César Matos da Silva
+* Julio César Matos da Silva (202204491664)
 
 Execução: Para que o usuário possa executar o sistema precisa instalar os seguintes pacotes:  
 * tkinter;  
