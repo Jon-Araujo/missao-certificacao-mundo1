@@ -10,7 +10,7 @@ Turma: 9001
 Semestre: 2022.2  
 Equipe (Grupo 12): 
 * Jonathan Araujo (202205178111) 
-* Jamison Queiroz 
+* Jamison Queiroz (202208101127)
 * Rafael Minski (202205006311)
 * Julio César Matos da Silva (202204491664)
 
