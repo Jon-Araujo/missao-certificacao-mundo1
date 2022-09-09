@@ -14,4 +14,5 @@ Equipe (Grupo 12):
 * Julio César Matos da Silva
 
 Descrição: Sistema desenvolvido para uma rede de televisão fictícia que auxilia no gerenciamento tanto dos cadastros de novos técnicos e ferramentas, como também faz a reserva destas ferramentas pelos técnicos através do cruzamento desses dados. Facilitando o controle para uma eficaz realização de manutenções preventivas e corretivas dos equipamentos.  
+
 Link YouTube mostrando funcionalidades: https://youtu.be/_xw-rr7pIRc  
